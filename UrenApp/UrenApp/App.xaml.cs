@@ -1,5 +1,4 @@
 ﻿using System;
-using UrenApp.Services;
 using UrenApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,8 +11,6 @@ namespace UrenApp
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
