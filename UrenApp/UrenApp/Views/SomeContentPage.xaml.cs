@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace UrenApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProjectListViewPage : ContentPage
+    public partial class SomeContentPage : ContentPage
     {
-        public ProjectListViewPage()
+        public SomeContentPage()
         {
             InitializeComponent();
         }

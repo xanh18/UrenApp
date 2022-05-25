@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrenApp.Android", "UrenApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrenApp.iOS", "UrenApp\UrenApp.iOS\UrenApp.iOS.csproj", "{0FF75438-37AC-4522-87BF-D35E5E317814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrenApp", "UrenApp\UrenApp\UrenApp.csproj", "{D7CBC6B9-C941-437F-AA87-07524F347527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrenApp", "UrenApp\UrenApp\UrenApp.csproj", "{D7CBC6B9-C941-437F-AA87-07524F347527}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

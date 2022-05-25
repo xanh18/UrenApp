@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UrenApp.Views.SomeContentPage"
+             xmlns:viewmodels="clr-namespace:UrenApp.ViewModels"
+             xmlns:model="clr-namespace:UrenApp.Models"
+             x:Name="somecontentPage"
+    x:DataType="viewmodels:ProjectsViewModel">
+    <ContentPage.BindingContext>
+        <viewmodels:ProjectsViewModel></viewmodels:ProjectsViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView
+        CachingStrategy="RecycleElement"
+        HasUnevenRows="True"
+        GroupDisplayBinding="{Binding Key}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemsSource="{Binding Project}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectionMode="None"
+        SeparatorVisibility="None">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Project">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem
+                            Command="{Binding Source={x:Reference somecontentPage}, Path=BindingContext.RemoveCommand}"
+                            CommandParameter="{Binding .}"
+                            IsDestructive="True"
+                            Text="Delete" />
+                        </ViewCell.ContextActions>
+                        <Grid Padding="10">
+                            <Frame CornerRadius="20" HasShadow="True">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label
+                                        FontSize="Large"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center"/>
+                                        <Label
+                                        FontSize="Large"
+                                        Text="{Binding Description}"
+                                        VerticalOptions="Center"/>
+                                        <Label
+                                        FontSize="Large"
+                                        Text="{Binding ProjectLeader}"
+                                        VerticalOptions="Center"/>
+                                        <Label                                    
+                                        FontSize="Large"
+                                        Text="{Binding Customer}"
+                                        VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
