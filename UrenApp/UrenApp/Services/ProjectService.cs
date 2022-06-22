@@ -10,16 +10,22 @@ using Xamarin.Forms;
 
 namespace Uregenregistratie.Services
 {
-    public  static class ProjectService
+    public static class ProjectService
     {
         static SQLiteAsyncConnection db;
-        async static Task Init()
+
+        public static void Reset()
+        {
+            db = null;
+        }
+
+        public async static Task Init(String path = null)
         {
             if (db != null)
                 return;
 
             // Get an absolute path to the database file
-            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
+            var databasePath = path ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
 
             db = new SQLiteAsyncConnection(databasePath);
 
@@ -33,7 +39,7 @@ namespace Uregenregistratie.Services
             {
                 Name = name,
                 Description = description,
-                ProjectLeader =  projectleader,
+                ProjectLeader = projectleader,
                 Customer = customer
             };
 

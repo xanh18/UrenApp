@@ -1,34 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UrenApp.Views.SomeContentPage"
+             x:Class="UrenApp.Views.InternetProjectPage"
              xmlns:viewmodels="clr-namespace:UrenApp.ViewModels"
              xmlns:model="clr-namespace:UrenApp.Models"
              x:Name="somecontentPage"
-    x:DataType="viewmodels:ProjectsViewModel">
+             x:DataType="viewmodels:InternetProjectViewModel">
+
     <ContentPage.BindingContext>
-        <viewmodels:ProjectsViewModel></viewmodels:ProjectsViewModel>
+        <viewmodels:InternetProjectViewModel></viewmodels:InternetProjectViewModel>
     </ContentPage.BindingContext>
+
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCommand}"></ToolbarItem>
-        <ToolbarItem Text="Internet" Command="{Binding InternetCommand}"></ToolbarItem>
-        <ToolbarItem Text="Hours" Command="{Binding HoursCommand}"></ToolbarItem>
-        <ToolbarItem Text="Camera" Command="{Binding CameraCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <ListView
         CachingStrategy="RecycleElement"
         HasUnevenRows="True"
         GroupDisplayBinding="{Binding Key}"
-        IsPullToRefreshEnabled="True"    
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        IsPullToRefreshEnabled="True"    
         ItemsSource="{Binding Project}"
         RefreshCommand="{Binding RefreshCommand}"
         SelectionMode="None"
         SeparatorVisibility="None">
 
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Project">
+                <DataTemplate x:DataType="model:ProjectResponse">
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem
@@ -36,6 +37,11 @@
                             CommandParameter="{Binding .}"
                             IsDestructive="True"
                             Text="Delete" />
+                            <MenuItem
+                            Command="{Binding Source={x:Reference somecontentPage}, Path=BindingContext.MailCommand}"
+                            CommandParameter="{Binding .}"
+                            IsDestructive="True"
+                            Text="Mail" />
                         </ViewCell.ContextActions>
                         <Grid Padding="10">
                             <Frame CornerRadius="20" HasShadow="True">
@@ -72,6 +78,14 @@
                                         <Label                                    
                                         FontSize="Large"
                                         Text="{Binding Customer}"
+                                        VerticalOptions="Center"/>
+                                        <Label
+                                        FontSize="Large"
+                                        Text="Total"
+                                        VerticalOptions="Center"/>
+                                        <Label                                    
+                                        FontSize="Large"
+                                        Text="{Binding Total}"
                                         VerticalOptions="Center"/>
                                     </StackLayout>
                                 </StackLayout>

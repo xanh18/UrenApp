@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uregenregistratie.Services;
 using UrenApp.Models;
+using UrenApp.Views;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
 
@@ -22,6 +23,12 @@ namespace UrenApp.ViewModels
         public AsyncCommand AddCommand { get; }
         public AsyncCommand<Project> RemoveCommand { get; }
 
+        public AsyncCommand InternetCommand { get; }
+
+        public AsyncCommand HoursCommand { get; }
+
+        public AsyncCommand CameraCommand { get; }
+
         public AsyncCommand<object> SelectedCommand { get; }
 
 
@@ -34,7 +41,10 @@ namespace UrenApp.ViewModels
             RemoveCommand = new AsyncCommand<Project>(Remove);
             AddCommand = new AsyncCommand(Add);
             RefreshCommand = new AsyncCommand(Refresh);
-         /*   SelectedCommand = new AsyncCommand<object>(Selected);*/
+            InternetCommand = new AsyncCommand(Internet);
+            HoursCommand = new AsyncCommand(Hours);
+            CameraCommand = new AsyncCommand(Camera);
+            /*   SelectedCommand = new AsyncCommand<object>(Selected);*/
         }
 
         async Task Add()
@@ -56,6 +66,26 @@ namespace UrenApp.ViewModels
             await ProjectService.RemoveProject(project.Id);
             await Refresh();
         }
+
+        async Task Internet()
+        {
+            var route = $"{nameof(InternetProjectPage)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
+        async Task Hours()
+        {
+            var route = $"{nameof(HoursPage)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
+
+        async Task Camera()
+        {
+            var route = $"{nameof(CameraPage)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
 
 
         async Task Refresh()

@@ -1,41 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UrenApp.Views.SomeContentPage"
+             x:Class="UrenApp.Views.HoursPage"
              xmlns:viewmodels="clr-namespace:UrenApp.ViewModels"
              xmlns:model="clr-namespace:UrenApp.Models"
-             x:Name="somecontentPage"
-    x:DataType="viewmodels:ProjectsViewModel">
+             x:Name="hoursPage"
+             x:DataType="viewmodels:HoursViewModel">
+
     <ContentPage.BindingContext>
-        <viewmodels:ProjectsViewModel></viewmodels:ProjectsViewModel>
+        <viewmodels:HoursViewModel></viewmodels:HoursViewModel>
     </ContentPage.BindingContext>
+
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCommand}"></ToolbarItem>
-        <ToolbarItem Text="Internet" Command="{Binding InternetCommand}"></ToolbarItem>
-        <ToolbarItem Text="Hours" Command="{Binding HoursCommand}"></ToolbarItem>
-        <ToolbarItem Text="Camera" Command="{Binding CameraCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <ListView
         CachingStrategy="RecycleElement"
         HasUnevenRows="True"
         GroupDisplayBinding="{Binding Key}"
-        IsPullToRefreshEnabled="True"    
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-        ItemsSource="{Binding Project}"
+        IsPullToRefreshEnabled="True"    
+        ItemsSource="{Binding Hours}"
         RefreshCommand="{Binding RefreshCommand}"
         SelectionMode="None"
         SeparatorVisibility="None">
 
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Project">
+                <DataTemplate x:DataType="model:Hours">
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem
-                            Command="{Binding Source={x:Reference somecontentPage}, Path=BindingContext.RemoveCommand}"
+                            Command="{Binding Source={x:Reference hoursPage}, Path=BindingContext.RemoveCommand}"
                             CommandParameter="{Binding .}"
                             IsDestructive="True"
                             Text="Delete" />
+                            <MenuItem
+                            Command="{Binding Source={x:Reference hoursPage}, Path=BindingContext.VerifyCommand}"
+                            CommandParameter="{Binding .}"
+                            IsDestructive="True"
+                            Text="verify" />
                         </ViewCell.ContextActions>
                         <Grid Padding="10">
                             <Frame CornerRadius="20" HasShadow="True">
@@ -43,7 +49,7 @@
                                     <StackLayout VerticalOptions="Center">
                                         <Label
                                         FontSize="Large"
-                                        Text="Name"
+                                        Text ="{Binding ProjectId}"
                                         VerticalOptions="Center"/>
                                         <Label
                                         FontSize="Large"
@@ -51,27 +57,15 @@
                                         VerticalOptions="Center"/>
                                         <Label
                                         FontSize="Large"
-                                        Text="Description"
-                                        VerticalOptions="Center"/>
-                                        <Label
-                                        FontSize="Large"
-                                        Text="{Binding Description}"
-                                        VerticalOptions="Center"/>
-                                        <Label
-                                        FontSize="Large"
-                                        Text="Projectleader"
-                                        VerticalOptions="Center"/>
-                                        <Label
-                                        FontSize="Large"
-                                        Text="{Binding ProjectLeader}"
-                                        VerticalOptions="Center"/>
-                                        <Label
-                                        FontSize="Large"
-                                        Text="Customer"
+                                        Text="{Binding FrontEnd}"
                                         VerticalOptions="Center"/>
                                         <Label                                    
                                         FontSize="Large"
-                                        Text="{Binding Customer}"
+                                        Text="{Binding BackEnd}"
+                                        VerticalOptions="Center"/>
+                                        <Label                                    
+                                        FontSize="Large"
+                                        Text="{Binding IsActive}"
                                         VerticalOptions="Center"/>
                                     </StackLayout>
                                 </StackLayout>

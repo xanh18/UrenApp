@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="UrenApp.Views.RegisterPage"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.Content>
+        <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand">
+            <Label Text="Username:"/>
+            <Entry Placeholder="Username" x:Name="UserName"/>
+            <Label Text="Password:"/>
+            <Entry IsPassword="True" x:Name="PassWord" Placeholder="Password"/>
+            <Button Text="Register" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
